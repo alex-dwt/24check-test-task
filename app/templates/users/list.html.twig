@@ -1,0 +1,57 @@
+{# @var users array #}
+{# @var order string #}
+
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h2>Users List</h2>
+
+    <a href="{{ path('addUser') }}" class="float-right btn btn-primary btn-lg active" role="button" aria-pressed="true">
+        Add new user
+    </a>
+
+    <div style="clear: both"></div>
+
+    <div class="order-line">
+        <p>
+            <a href="{{ path('getUsersList', {'order': constant('App\\Domain\\User\\Criteria\\UsersListCriteria::ORDER_NAME_ASC')}) }}">
+                By name ASC
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('getUsersList', {'order': constant('App\\Domain\\User\\Criteria\\UsersListCriteria::ORDER_NAME_DESC')}) }}">
+                By name DESC
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('getUsersList', {'order': constant('App\\Domain\\User\\Criteria\\UsersListCriteria::ORDER_NUM_ASC')}) }}">
+                By age ASC
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('getUsersList', {'order': constant('App\\Domain\\User\\Criteria\\UsersListCriteria::ORDER_NUM_DESC')}) }}">
+                By age DESC
+            </a>
+        </p>
+    </div>
+
+    <table class="table" style="margin-top: 20px">
+        <tbody>
+
+        {% for user in users %}
+            <tr>
+                <td>
+                    {{ include('users/block/user.html.twig', { 'user': user }) }}
+
+                    <a href="{{ path('getUser', { 'id': user.id }) }}" class="btn btn-warning btn-lg btn-sm" role="button" aria-pressed="true">
+                        View
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+{% endblock %}

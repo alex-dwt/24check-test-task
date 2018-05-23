@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+    php:
+        image: alex_dwt/24check-task-php:latest
+        build:
+            context: '.'
+            dockerfile: 'php/Dockerfile'
+        environment:
+            - DATABASE_URL
+        networks:
+            - webnet
+
+    front:
+        image: alex_dwt/24check-task-front:latest
+        build: 'nginx'
+        ports:
+              - 80:80
+        networks:
+              - webnet
+
+    database:
+        image: mysql:5.7.22
+        volumes:
+            - msdata:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_PASS}
+            - MYSQL_USER=${DB_USER}
+            - MYSQL_PASSWORD=${DB_PASS}
+            - MYSQL_DATABASE=${DB_NAME}
+        networks:
+            - webnet
+
+networks:
+  webnet:
+
+volumes:
+   msdata:

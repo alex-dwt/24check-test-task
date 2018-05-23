@@ -1,0 +1,8 @@
+<div>
+    <p>Name: {{ user.name }}</p>
+    <p>Age: {{ user.age }}</p>
+
+    <a href="{{ path('editUser', { 'id': user.id }) }}" class="btn btn-success btn-lg btn-sm" role="button" aria-pressed="true">
+        Edit
+    </a>
+</div>

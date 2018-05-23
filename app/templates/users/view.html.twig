@@ -1,0 +1,7 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h2>View user</h2>
+
+    {{ include('users/block/user.html.twig', { 'user': user }) }}
+{% endblock %}
